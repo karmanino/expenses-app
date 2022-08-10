@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "expenses-app-6c86a": {
+      "hosting": {
+        "expenses-app": [
+          "expenses-app-6c86a"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "expenses-app-6c86a"
+  }
+}

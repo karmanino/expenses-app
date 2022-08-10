@@ -95,6 +95,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "expenses-app:build:production",
+            "firebaseProject": "expenses-app-6c86a",
+            "firebaseHostingSite": "expenses-app-6c86a"
+          }
         }
       }
     }
