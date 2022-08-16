@@ -1,21 +1,41 @@
 import { Injectable } from '@angular/core';
 import * as auth from '@angular/fire/auth';
 import * as firestore from '@angular/fire/firestore';
-import { map } from 'rxjs';
+import { collection } from '@firebase/firestore';
+import { Store } from '@ngrx/store';
+import { distinctUntilChanged, map, take } from 'rxjs';
+import * as authActions from '../auth/auth.actions';
 import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public auth: auth.Auth, private firestore: firestore.Firestore) {}
+
+  private activeUser: User | null= null;
+
+  get user() {
+    return {...this.activeUser}
+  }
+
+  constructor(public auth: auth.Auth, private firestore: firestore.Firestore, private store: Store) {}
 
   initAuthListener() {
     auth.authState(this.auth).subscribe((fuser) => {
       if (fuser?.email) {
-        console.log('existe');
+        const doc = firestore.doc(this.firestore, `${fuser?.uid}/user`);
+        firestore
+          .docData(doc)
+          .pipe(take(1))
+          .subscribe((res) => {
+          this.activeUser =  User.fromFirebase(fuser.uid, res['nombre'], res['email']);
+            this.store.dispatch(
+              authActions.setUser({ user: {...this.activeUser!} })
+            )
+          });
       } else {
-        console.log('no existe papucho');
+        this.activeUser = null;
+        this.store.dispatch(authActions.unsetUser());
       }
     });
   }
@@ -23,7 +43,7 @@ export class AuthService {
   createUser(username: string, email: string, password: string) {
     return auth.createUserWithEmailAndPassword(this.auth, email, password).then(({ user }) => {
       const newUser = new User(user.uid, username, email);
-      return firestore.setDoc(firestore.doc(this.firestore, `${user.uid}/user`), {...newUser});
+      return firestore.setDoc(firestore.doc(this.firestore, `${user.uid}/user`), { ...newUser });
     });
   }
 

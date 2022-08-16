@@ -2,53 +2,56 @@
   <div class="col-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Agregar Ingreso / Egreso</h4>
+          <h4 class="card-title">Add new movement</h4>
           <p class="card-description">
-            Especifique el monto y el tipo
+            Specify amount and type
           </p>
 
-          <form>
+          <form [formGroup]="movementForm" (ngSubmit)="save()">
             
             <div class="form-group">
-              <label>Descripción</label>
+              <label>Description</label>
               <input type="text" 
                      class="form-control" 
-                     placeholder="Descripción"
-                     name="descripcion">
+                     placeholder="Movement description"
+                     name="descripcion"
+                     formControlName="description"
+                     >
             </div>
 
             <div class="form-group">
-                <label>Monto</label>
+                <label>Amount</label>
                 <input type="number" 
                        class="form-control" 
-                       placeholder="Monto"
-                       name="monto">
+                       placeholder="Amount ($)"
+                       name="monto"
+                       formControlName="amount"
+                       >
                   <p>
-                    Debe de ser un monto positivo
+                    It must be an positive number
                   </p>
               </div>
 
             <div class="form-group">
-                <label>Tipo</label>
+                <label>Type</label>
                 <br>
-                <button type="button" class="btn btn-primary btn-block">Ingreso</button>
-                <!-- <button type="button" class="btn btn-warning btn-block">Egreso</button> -->
+                <button type="button" class="btn btn-success btn-block" (click)="type = 'expense'" *ngIf="type ==='income'">Income</button>
+                <button type="button" class="btn btn-danger btn-block" (click)="type = 'income'" *ngIf="type ==='expense'">Expense</button>
             </div>
 
             <hr>
-            <button type="button" class="btn btn-success mr-2">
+            <button type="submit" class="btn btn-success mr-2" [disabled]="movementForm.invalid" *ngIf="!loading">
               <i class="fa fa-save"></i>
-              Agregar
+              Add
             </button>
 
-            <!-- 
-              <button disabled class="btn btn-success mr-2">
-                <i class="fa fa-spin fa-sync"></i>
-                Espere por favor...
-              </button> 
-            -->
             
-            <button type="reset" class="btn btn-light">Cancelar</button>
+              <button disabled class="btn btn-success mr-2" *ngIf="loading">
+                <i class="fa fa-spin fa-sync"></i> Saving...
+              </button> 
+           
+            
+            <button type="reset" class="btn btn-light">Reset</button>
 
           </form>
         </div>

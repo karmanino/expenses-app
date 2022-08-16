@@ -4,6 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 // Modules
 import { AppRoutingModule } from './app-routing.module';
 
+//NgRx
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -26,6 +30,8 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { appReducers } from './app.reducer';
+
 
 @NgModule({
   declarations: [
@@ -44,6 +50,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
