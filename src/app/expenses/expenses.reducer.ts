@@ -13,12 +13,14 @@ export const initialState: State = {
 const _expensesReducer = createReducer(
   initialState,
 
-  on(actions.saveMovement, (state, movement) => {
-    console.log('movement', movement)
+  on(actions.saveMovement, (state, { movement }) => {
     let newMovements = [...state.movements];
-    newMovements.push(movement.movement);
-    return { movements: newMovements };
-  })
+    newMovements.push(movement);
+    return { ...state, movements: newMovements };
+  }),
+
+  on(actions.setMovements, (state, { movements }) => ({ ...state, movements: [...movements] })),
+  on(actions.unsetMovements, (state) => ({ ...state, movements: [] }))
 );
 
 export function expensesReducer(state: any, action: any) {

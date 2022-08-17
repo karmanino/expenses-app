@@ -5,17 +5,19 @@ import { collection } from '@firebase/firestore';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, map, take } from 'rxjs';
 import * as authActions from '../auth/auth.actions';
+import * as expensesActions from '../expenses/expenses.actions';
+import { Movement } from '../models/movement.model';
 import { User } from '../models/user.model';
+import { MovementService } from './movement.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
-  private activeUser: User | null= null;
+  private activeUser: User | null = null;
 
   get user() {
-    return {...this.activeUser}
+    return { ...this.activeUser };
   }
 
   constructor(public auth: auth.Auth, private firestore: firestore.Firestore, private store: Store) {}
@@ -28,10 +30,8 @@ export class AuthService {
           .docData(doc)
           .pipe(take(1))
           .subscribe((res) => {
-          this.activeUser =  User.fromFirebase(fuser.uid, res['nombre'], res['email']);
-            this.store.dispatch(
-              authActions.setUser({ user: {...this.activeUser!} })
-            )
+            this.activeUser = User.fromFirebase(fuser.uid, res['nombre'], res['email']);
+            this.store.dispatch(authActions.setUser({ user: { ...this.activeUser! } }));
           });
       } else {
         this.activeUser = null;

@@ -15,11 +15,11 @@
               </thead>
 
               <tbody>
-                <tr>
-                  <td>Descripción</td>
-                  <td>Monto</td>
-                  <td>Tipo</td>
-                  <td>acciones</td>
+                <tr *ngFor="let movement of movements | orderByCreation">
+                  <td>{{movement.description}}</td>
+                  <td>{{movement.amount | currency}}</td>
+                  <td [ngClass]="movement.type == 'income' ? 'text-success' : 'text-danger'">{{movement.type}}</td>
+                  <td><button type="button" class="btn btn-danger" (click)="deleteMovement(movement.uid!)"><i class="fa fa-trash"></i> Borrar</button></td>
                 </tr>
               </tbody>
 

@@ -31,6 +31,8 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { appReducers } from './app.reducer';
+import { orderByCreation } from './pipes/orderByCreation.pipe';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -44,12 +46,14 @@ import { appReducers } from './app.reducer';
     DetailComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    orderByCreation
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgChartsModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

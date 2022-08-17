@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,9 +10,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() nameToDisplay: string = '';
+
   constructor(private authService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
+    console.log(this.authService.user);
   }
 
   logout(){
