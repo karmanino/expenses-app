@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,15 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styles: [
   ]
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
-  @Input() nameToDisplay: string = '';
+  @Input() user: User | undefined;
 
   constructor(private authService: AuthService, private router:Router) { }
-
-  ngOnInit(): void {
-    console.log(this.authService.user);
-  }
 
   logout(){
     this.authService.logoutUser()

@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styles: [],
+  styles: [`img{border-radius: 25px} .form-group{text-align: center}`],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
   loading = false;
@@ -22,7 +22,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
+    avatar: ['1', Validators.required]
   });
+
+  imageSrc: string = "assets/images/faces/face1.jpg";
 
   constructor(
     private fb: FormBuilder,
@@ -39,21 +42,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   createUser(): void {
     if (this.formGroup.invalid) return;
-    const { name, email, password } = this.formGroup.value;
+    const { name, email, password, avatar } = this.formGroup.value;
     this.store.dispatch(ui.isLoading());
-    // Swal.fire({
-    //   title: 'Please wait',
-    //   text: 'Checking your details...',
-    //   allowOutsideClick: false,
-    //   allowEscapeKey: false,
-    //   didOpen: () => Swal.showLoading(),
-    // });
-
     this.authService
-      .createUser(name, email, password)
+      .createUser(name, email, password, avatar)
       .then((_) => {
         this.store.dispatch(ui.stopLoading());
-        // Swal.close();
         this.router.navigate(['/']);
       })
       .catch((error: AuthError) => {
@@ -66,5 +60,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
           text: this.authService.convertErrorCodeToMessage(error.code),
         });
       });
+  }
+
+  changeAvatar(){
+    let avatar = this.formGroup.get('avatar')?.value;
+    this.imageSrc = `assets/images/faces/face${avatar}.jpg`;
   }
 }

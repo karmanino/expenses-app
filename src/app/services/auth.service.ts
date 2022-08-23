@@ -30,7 +30,7 @@ export class AuthService {
           .docData(doc)
           .pipe(take(1))
           .subscribe((res) => {
-            this.activeUser = User.fromFirebase(fuser.uid, res['nombre'], res['email']);
+            this.activeUser = User.fromFirebase(fuser.uid, res['name'], res['email'], res['avatarId']);
             this.store.dispatch(authActions.setUser({ user: { ...this.activeUser! } }));
           });
       } else {
@@ -40,9 +40,9 @@ export class AuthService {
     });
   }
 
-  createUser(username: string, email: string, password: string) {
+  createUser(username: string, email: string, password: string, avatarId: number) {
     return auth.createUserWithEmailAndPassword(this.auth, email, password).then(({ user }) => {
-      const newUser = new User(user.uid, username, email);
+      const newUser = new User(user.uid, username, email, avatarId);
       return firestore.setDoc(firestore.doc(this.firestore, `${user.uid}/user`), { ...newUser });
     });
   }

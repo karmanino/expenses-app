@@ -6,6 +6,10 @@ export interface State {
   movements: Movement[];
 }
 
+export interface StateLazyLoaded {
+  expenses: State;
+}
+
 export const initialState: State = {
   movements: [],
 };

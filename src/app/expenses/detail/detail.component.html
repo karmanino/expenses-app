@@ -2,14 +2,14 @@
     <div class="col-12">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Detalle de ingreso egreso</h4>
+            <h4 class="card-title">Movements details</h4>
 
-            <table class="table">
+            <table class="table" *ngIf="movements.length > 0; else noMovements">
               <thead>
                 <tr>
-                  <th>Descripción</th>
-                  <th>Monto</th>
-                  <th>Tipo</th>
+                  <th>Description</th>
+                  <th>Amount</th>
+                  <th>Type</th>
                   <th></th>
                 </tr>
               </thead>
@@ -18,14 +18,13 @@
                 <tr *ngFor="let movement of movements | orderByCreation">
                   <td>{{movement.description}}</td>
                   <td>{{movement.amount | currency}}</td>
-                  <td [ngClass]="movement.type == 'income' ? 'text-success' : 'text-danger'">{{movement.type}}</td>
-                  <td><button type="button" class="btn btn-danger" (click)="deleteMovement(movement.uid!)"><i class="fa fa-trash"></i> Borrar</button></td>
+                  <td [ngClass]="movement.type == 'income' ? 'text-success' : 'text-danger'">{{movement.type | titlecase}}</td>
+                  <td><button type="button" class="btn btn-danger" (click)="deleteMovement(movement.uid!)"><i class="fa fa-trash"></i> Delete</button></td>
                 </tr>
               </tbody>
 
             </table>
-
-
+            <ng-template #noMovements><p class="text-muted">No movements yet. You may want to <a routerLink="/movement" class="text-muted">insert a new record.</a></p></ng-template>
           </div>
         </div>
     </div>

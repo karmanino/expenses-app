@@ -3,21 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 // Modules
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
 
 //NgRx
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ExpensesComponent } from './expenses/expenses.component';
-import { StatsComponent } from './expenses/stats/stats.component';
-import { DetailComponent } from './expenses/detail/detail.component';
-import { FooterComponent } from './shared/footer/footer.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -31,29 +25,19 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { appReducers } from './app.reducer';
-import { orderByCreation } from './pipes/orderByCreation.pipe';
-import { NgChartsModule } from 'ng2-charts';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    RegisterComponent,
-    DashboardComponent,
-    ExpensesComponent,
-    StatsComponent,
-    DetailComponent,
-    FooterComponent,
-    NavbarComponent,
-    SidebarComponent,
-    orderByCreation
+    AppComponent
   ],
   imports: [
     BrowserModule,
+    AuthModule,
+    SharedModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgChartsModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     provideFirebaseApp(() => initializeApp(environment.firebase)),

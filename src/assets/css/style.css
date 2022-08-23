@@ -8110,9 +8110,10 @@ pre {
   .offset-xl-10 {
     margin-left: 83.33333%; }
   .offset-xl-11 {
-    margin-left: 91.66667%; } }
+    margin-left: 91.66667%; }
 
 .table {
+  margin-top: 30px;
   width: 100%;
   max-width: 100%;
   margin-bottom: 1rem;
@@ -11504,7 +11505,7 @@ button.bg-dark:focus {
   .align-self-xl-baseline {
     align-self: baseline !important; }
   .align-self-xl-stretch {
-    align-self: stretch !important; } }
+    align-self: stretch !important; }
 
 .float-left {
   float: left !important; }
@@ -12048,8 +12049,7 @@ button.bg-dark:focus {
     margin-bottom: auto !important; }
   .ml-xl-auto,
   .mx-xl-auto {
-    margin-left: auto !important; } }
-
+    margin-left: auto !important; }
 .text-monospace {
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 
@@ -12621,7 +12621,8 @@ input:focus {
           .sidebar .nav .nav-item.nav-profile .nav-link .user-wrapper .text-wrapper .designation {
             margin-right: 3px; }
     .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link {
-      background: #fafbfc;
+      background: rgb(255,255,255);
+      background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(0,187,255,1) 300%);
       color: #4a4a4a; }
     .sidebar .nav.sub-menu {
       margin-bottom: 0;
@@ -12673,6 +12674,7 @@ input:focus {
   .sidebar-dark .sidebar .nav .nav-item .sidebar-sticker {
     background: #1f2537; }
   .sidebar-dark .sidebar .nav:not(.sub-menu) > .nav-item:hover:not(.nav-profile) > .nav-link {
+    transition: all 0.5s ease-out;
     background: #1f2537;
     color: #a0a0a0; }
   .sidebar-dark .sidebar .nav.sub-menu .nav-item .nav-link {
@@ -12718,17 +12720,11 @@ input:focus {
       .navbar.default-layout .navbar-brand-wrapper .navbar-brand:active, .navbar.default-layout .navbar-brand-wrapper .navbar-brand:focus, .navbar.default-layout .navbar-brand-wrapper .navbar-brand:hover {
         color: #424546; }
       .navbar.default-layout .navbar-brand-wrapper .navbar-brand img {
-        width: calc(255px - 130px);
-        max-width: 100%;
-        height: 28px;
         margin: auto;
         vertical-align: middle; }
     .navbar.default-layout .navbar-brand-wrapper .brand-logo-mini {
-      display: none; }
-      .navbar.default-layout .navbar-brand-wrapper .brand-logo-mini img {
-        width: calc(70px - 50px);
-        max-width: 100%;
-        height: 28px;
+      display: none; }brand-logo-mini
+      .navbar.default-layout .navbar-brand-wrapper . img {
         margin: auto; }
   .navbar.default-layout .navbar-menu-wrapper {
     transition: width 0.25s ease;

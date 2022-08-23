@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ChartData } from 'chart.js';
-import { AppState } from 'src/app/app.reducer';
 import { Movement } from 'src/app/models/movement.model';
+import { StateLazyLoaded } from '../expenses.reducer';
 
 @Component({
   selector: 'app-stats',
@@ -16,7 +16,7 @@ export class StatsComponent implements OnInit {
   
   public doughnutChartLabels: string[] = ['Income', 'Expense'];
   public doughnutChartData: ChartData<'doughnut'> = {datasets: []}
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<StateLazyLoaded>) {}
 
   ngOnInit(): void {
     this.store.select('expenses').subscribe(({ movements }) => this.getStats(movements));

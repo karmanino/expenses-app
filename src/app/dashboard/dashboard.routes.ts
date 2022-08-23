@@ -4,7 +4,7 @@ import { ExpensesComponent } from '../expenses/expenses.component';
 import { StatsComponent } from '../expenses/stats/stats.component';
 
 export const dashboardRoutes: Routes = [
-  { path: '', component: StatsComponent },
   { path: 'movement', component: ExpensesComponent },
   { path: 'detail', component: DetailComponent },
+  { path: '**', component: StatsComponent },  
 ];

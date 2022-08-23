@@ -1,8 +1,8 @@
-<app-navbar></app-navbar>
+<app-navbar [user]="user"></app-navbar>
 <div class="page-body-wrapper">
-  <app-sidebar [nameToDisplay]="nameToDisplay"></app-sidebar>
+  <app-sidebar [user]="user"></app-sidebar>
   <div class="main-panel">
     <div class="content-wrapper"><router-outlet></router-outlet></div>
-    
+    <app-footer></app-footer>
   </div>
 </div>

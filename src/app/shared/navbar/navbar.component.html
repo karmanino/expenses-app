@@ -1,11 +1,12 @@
 <!-- partial:../../partials/_navbar.html -->
 <nav class="navbar default-layout col-sm-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
-      <a class="navbar-brand brand-logo">
-        <img src="assets/images/logo.svg" alt="logo" />
+      <a class="navbar-brand brand-logo" style="color: #006060; font-size: large">
+        <img src="assets/favicon/android-icon-36x36.png" alt="logo" style="margin-right: 10px"/>
+        <span style="margin-top: 10px">Expenses <span style="color: lightblue">App</span></span>
       </a>
       <a class="navbar-brand brand-logo-mini">
-        <img src="assets/images/logo-mini.svg" alt="logo" />
+        <img src="assets/favicon/android-icon-36x36.png" alt="logo"/>
       </a>
     </div>
     
@@ -14,9 +15,9 @@
       <ul class="navbar-nav navbar-nav-right">
 
         <li class="nav-item d-none d-sm-inline-block">
-          <a class="nav-link" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-            <span class="profile-text">Hello, Richard V.Welsh !</span>
-            <img class="img-xs rounded-circle" src="assets/images/faces/face1.jpg" alt="Profile image">
+          <a class="nav-link" id="UserDropdown" data-toggle="dropdown" aria-expanded="false">
+            <span class="profile-text" *ngIf="!!user?.name">Logged in as <b>{{user?.name}}</b></span>
+            <img class="img-xs rounded-circle" *ngIf="!!user?.avatarId" [src]="'assets/images/faces/face' + user?.avatarId + '.jpg'" alt="Profile image">
           </a>
         </li>
       </ul>
@@ -25,4 +26,3 @@
       </button>
     </div>
   </nav>
-  <!-- partial -->

@@ -2,7 +2,7 @@
   <div class="content-wrapper d-flex align-items-center auth register-bg-1 theme-one">
     <div class="row w-100">
       <div class="col-lg-4 mx-auto">
-        <h2 class="text-center mb-4">Registro</h2>
+        <h2 class="text-center mb-4">Register</h2>
         <div class="auto-form-wrapper">
           <form action="#" [formGroup]="formGroup" (ngSubmit)="createUser()">
             <div class="form-group">
@@ -35,7 +35,21 @@
                 </div>
               </div>
             </div>
-
+            <div class="form-group">
+              <div class="input-group">
+                <select class="form-control" formControlName="avatar" id="lang" style="height: 100%" (change)="changeAvatar()">
+                  <option *ngFor="let e of [].constructor(20); let i = index" [value]="i+1">Avatar #{{i+1}}</option>
+                </select>
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    <i class="fa fa-check-circle" *ngIf="formGroup.get('avatar')?.valid"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+            <img [src]="imageSrc">
+          </div>
             <div class="form-group">
               <button class="btn btn-primary submit-btn btn-block" type="submit" [disabled]="formGroup.invalid"
                 *ngIf="!loading">Create account</button>
@@ -43,7 +57,7 @@
                 *ngIf="loading"><i class="fa fa-spin fa-sync"></i> Loading...</button>
             </div>
             <div class="text-block text-center my-3">
-              <span class="text-small font-weight-semibold">ya tienes una cuenta?</span>
+              <span class="text-small font-weight-semibold">Already have an account?</span>
               <br>
               <a routerLink="/login" class="text-black text-small">Login</a>
             </div>

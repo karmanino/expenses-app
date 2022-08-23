@@ -5,13 +5,13 @@
           
           <div class="user-wrapper">
             <div class="profile-image">
-              <img src="assets/images/faces/face1.jpg" alt="profile image">
+              <img [src]="'assets/images/faces/face' + user?.avatarId + '.jpg'" alt="profile image" *ngIf="!!user?.avatarId" >
             </div>
             
             <div class="text-wrapper">
-              <p class="profile-name">{{nameToDisplay}}</p>
+              <p class="profile-name">{{user?.name}}</p>
               <div>
-                <small class="designation text-muted">Gerente</small>
+                <small class="designation text-muted">{{user?.email}}</small>
               </div>
             </div>
           </div>
@@ -22,28 +22,28 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/">
           <i class="menu-icon fa fa-tachometer-alt"></i>
-          <span class="menu-title">Dashboard</span>
+          <span class="menu-title">Overview</span>
         </a>
       </li>
   
       <li class="nav-item">
         <a class="nav-link" routerLink="/movement">
           <i class="menu-icon fa fa-clipboard-list"></i>
-          <span class="menu-title">Ingresos y Egresos</span>
+          <span class="menu-title">New movement</span>
         </a>
       </li>
   
       <li class="nav-item">
         <a class="nav-link" routerLink="/detail">
           <i class="menu-icon fa fa-table"></i>
-          <span class="menu-title">Detalle</span>
+          <span class="menu-title">All movements</span>
         </a>
       </li>
   
       <li class="nav-item">
         <a class="nav-link cursor" (click)="logout()">
           <i class="menu-icon fa fa-sign-out-alt"></i>
-          <span class="menu-title">Cerrar sesión</span>
+          <span class="menu-title">Log out</span>
         </a>
       </li>
       
